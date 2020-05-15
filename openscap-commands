@@ -1,0 +1,11 @@
+# generate a playbook according a customized profile
+
+oscap xccdf generate fix --fix-type ansible --profile xccdf_local.eucorp.example_profile_stig-rhel7-disa_full --tailoring-file /tmp/rhel7_example_security_profile.xml --output stig-rhel7-full.yml /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+
+# generate a playbook according a results file
+
+ oscap xccdf generate fix --fix-type ansible --result-id xccdf_org.open-scap_testresult_xccdf_local.eucorp.example_profile_stig-rhel7-disa_full --output stig-rhel7-full-results.yml --tailoring-file /tmp/rhel7_example_security_profile.xml /tmp/server2.servicetest.loc-2019-10-01-scan-xccdf-results.xml
+ 
+# scan system and generate html report
+
+oscap xccdf eval --profile xccdf_local.eucorp.example_profile_stig-rhel7-disa_full --results /tmp/$(uname -n)-$(date +%F_%H-%M-%S)-results.xml --report /tmp/$(uname -n)-$(date +%F_%H-%M-%S)-report.html /tmp/rhel7_example_security_profile.xml
